@@ -34,6 +34,7 @@ import * as Constants from '../constants/Constants';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import * as Types from '../constants/Types';
 import * as H from 'history';
+import Firebase from './Firebase'
 
 const styles: object = {
   toolbarIcon: {
@@ -283,10 +284,9 @@ class BurgerMenu extends React.Component<Props, State>{
             </ListItem>
             <ListItem
               button
-              disabled
               onClick={(): void => {
                 this.setState({ menu: 8, chalkOpen: false });
-                this.props.history.push("/Messages")
+                this.props.history.push("/CoachingResources")
               }}
               className={classes.regular}
             >
@@ -360,9 +360,8 @@ class BurgerMenu extends React.Component<Props, State>{
               button
               onClick={(): void => {
                 this.setState({ menu: 12, chalkOpen: false });
-                this.props.history.push("/Account");
+                this.props.history.push("/MyAccount");
               }}
-              disabled
               className={classes.regular}
             >
               <ListItemIcon>
@@ -408,9 +407,7 @@ class BurgerMenu extends React.Component<Props, State>{
         </Drawer>
         {this.state.teacherModal ? (
           <FirebaseContext.Consumer>
-            {(firebase: {
-              getTeacherList(): Promise<Types.Teacher[]>
-            }): React.ReactNode => (
+            {(firebase: Firebase): React.ReactNode => (
               <TeacherModal
                 handleClose={this.handleTeacherModalClose}
                 firebase={firebase}
